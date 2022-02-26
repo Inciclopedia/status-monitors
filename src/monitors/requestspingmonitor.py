@@ -1,7 +1,7 @@
 import requests
 
-from src.base.basemonitor import BaseMonitor
-from src.base.outagelevelobserver import OutageLevel
+from base.basemonitor import BaseMonitor
+from base.outagelevelobserver import OutageLevel
 
 
 class RequestsPingMonitor(BaseMonitor):

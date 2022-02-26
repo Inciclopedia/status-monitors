@@ -1,8 +1,8 @@
 import json
 import time
 
-from src.base.outagelevelobserver import OutageLevelObserver, OutageLevel
-from src.base.quantitativeobserver import QuantitativeObserver
+from base.outagelevelobserver import OutageLevelObserver, OutageLevel
+from base.quantitativeobserver import QuantitativeObserver
 import requests
 
 from secrets import *

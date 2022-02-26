@@ -2,9 +2,9 @@ from abc import ABC, abstractmethod
 from typing import List, Dict
 
 from secrets import OUTAGE_CHANGE_AFTER
-from src.base.outagelevelobserver import OutageLevelObserver, OutageLevel
-from src.base.qualitativeobserver import QualitativeObserver
-from src.base.quantitativeobserver import QuantitativeObserver
+from base.outagelevelobserver import OutageLevelObserver, OutageLevel
+from base.qualitativeobserver import QualitativeObserver
+from base.quantitativeobserver import QuantitativeObserver
 
 
 class BaseMonitor(ABC):
