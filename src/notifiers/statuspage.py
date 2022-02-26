@@ -30,10 +30,9 @@ class StatusPageNotifier(OutageLevelObserver, QuantitativeObserver):
         body = {"component": {
                            "status": self.__convert_outage(value)
                        }}
-        if DRY_MODE:
-            print("PATCH https://api.statuspage.io/v1/pages/{}/components/{}".format(STATUSPAGE_PAGE_ID, component))
-            print(json.dumps(body))
-        else:
+        print("PATCH https://api.statuspage.io/v1/pages/{}/components/{}".format(STATUSPAGE_PAGE_ID, component))
+        print(json.dumps(body))
+        if not DRY_MODE:
             requests.patch("https://api.statuspage.io/v1/pages/{}/components/{}".format(STATUSPAGE_PAGE_ID, component),
                            headers={"Authorization": "Oauth {}".format(STATUSPAGE_API_KEY)},
                            json=body)
@@ -51,10 +50,9 @@ class StatusPageNotifier(OutageLevelObserver, QuantitativeObserver):
                           ]
                       }
             }
-        if DRY_MODE:
-            print("POST https://api.statuspage.io/v1/pages/{}/metrics/data".format(STATUSPAGE_PAGE_ID))
-            print(json.dumps(body))
-        else:
+        print("POST https://api.statuspage.io/v1/pages/{}/metrics/data".format(STATUSPAGE_PAGE_ID))
+        print(json.dumps(body))
+        if not DRY_MODE:
             requests.post("https://api.statuspage.io/v1/pages/{}/metrics/data".format(STATUSPAGE_PAGE_ID),
                           headers={"Authorization": "Oauth {}".format(STATUSPAGE_API_KEY)},
                           json=body)

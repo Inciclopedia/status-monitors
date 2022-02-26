@@ -54,7 +54,6 @@ class DiscordWebhook(OutageLevelObserver, QuantitativeObserver):
           ]
         }
         for webhook in DISCORD_WEBHOOKS:
-            if DRY_MODE:
-                print("POST {}\n".format(webhook, json.dumps(payload)))
-            else:
+            print("POST {}\n".format(webhook, json.dumps(payload)))
+            if not DRY_MODE:
                 requests.post(webhook, data=json.dumps(payload), headers={"Content-Type": "application/json;charset=UTF-8"})
