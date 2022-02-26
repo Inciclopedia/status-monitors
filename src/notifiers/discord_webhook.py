@@ -26,6 +26,16 @@ class DiscordWebhook(OutageLevelObserver, QuantitativeObserver):
             hx = "ff0000"
         return int(hx, 16)
 
+    def __get_status(self, outage: OutageLevel) -> str:
+        status = "OK"
+        if outage == OutageLevel.PARTIAL_OUTAGE:
+            status = "Caída parcial"
+        elif outage == OutageLevel.DEGRADED_PERFORMANCE:
+            status = "Rendimiento degradado"
+        elif outage == OutageLevel.DOWN:
+            status = "Caído"
+        return status
+
     def notify_quantitative(self, value: int, url: str):
         payload = {
           "content": None,
@@ -41,12 +51,12 @@ class DiscordWebhook(OutageLevelObserver, QuantitativeObserver):
                 },
                 {
                   "name": "Estado",
-                  "value": "OK",
+                  "value": self.__get_status(self.last_outage),
                   "inline": True
                 },
                 {
                   "name": "Latencia",
-                  "value": "200 ms",
+                  "value": str(value) + " ms",
                   "inline": True
                 }
               ]
