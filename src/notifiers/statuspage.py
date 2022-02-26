@@ -44,7 +44,7 @@ class StatusPageNotifier(OutageLevelObserver, QuantitativeObserver):
         body = {"data": {
                           metric: [
                               {
-                                  "timestamp": int(time.time() * 1000),
+                                  "timestamp": int(time.time()),
                                   "value": value
                               }
                           ]
