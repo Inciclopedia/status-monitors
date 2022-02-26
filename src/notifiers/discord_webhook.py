@@ -46,7 +46,7 @@ class DiscordWebhook(OutageLevelObserver, QuantitativeObserver):
               "fields": [
                 {
                   "name": "URL",
-                  "value": "http://inciclopedia.org",
+                  "value": url,
                   "inline": True
                 },
                 {
