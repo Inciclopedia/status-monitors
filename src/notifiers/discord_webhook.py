@@ -14,9 +14,13 @@ class DiscordWebhook(OutageLevelObserver, QuantitativeObserver):
 
     def notify_outage(self, value: OutageLevel, url: str):
         if value != self.last_outage:
+            if value == OutageLevel.DOWN:
+                content = " ".join(ESCALATION_IDS)
+            else:
+                content = None
             self.last_outage = value
             payload = {
-                "content": None,
+                "content": content,
                 "embeds": [
                     {
                         "title": "Estado del servidor",
