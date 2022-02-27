@@ -13,7 +13,13 @@ class RequestsPingMonitor(BaseMonitor):
 
     def poll(self):
         try:
-            time = requests.get(self.endpoint, timeout=self.timeout).elapsed.total_seconds() * 1000
+            response = requests.get(self.endpoint, timeout=self.timeout)
+            time = response.elapsed.total_seconds() * 1000
+            if response.status_code >= 400:
+                self.notify_quantitative(int(time), self.endpoint)
+                self.notify_qualitative(False, self.endpoint)
+                self.debounce_outage(OutageLevel.DOWN, self.endpoint)
+                return
             self.notify_quantitative(int(time), self.endpoint)
             self.notify_qualitative(True, self.endpoint)
             if time < self.target:
