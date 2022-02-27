@@ -54,6 +54,9 @@ class BaseMonitor(ABC):
                     self.notify_outage(value, url)
                     del self.upcoming_status[url]
                     del self.outage_counters[url]
+        elif value == self.current_status[url]:
+            del self.upcoming_status[url]
+            del self.outage_counters[url]
 
     @abstractmethod
     def poll(self):
