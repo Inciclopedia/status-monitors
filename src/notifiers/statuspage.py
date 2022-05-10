@@ -73,7 +73,8 @@ class StatusPageNotifier(OutageLevelObserver, QuantitativeObserver):
             requests.patch("https://api.statuspage.io/v1/pages/{}/components/{}".format(STATUSPAGE_PAGE_ID, component),
                            headers={"Authorization": "Oauth {}".format(STATUSPAGE_API_KEY)},
                            json=body)
-        if value == OutageLevel.DOWN and self.last_incident_time is None or time.time() - self.last_incident_time > INCIDENT_MARGIN:
+        if (value == OutageLevel.DOWN and not self.last_incident_time) or (self.last_incident_time and time.time() -
+                                                                           self.last_incident_time > INCIDENT_MARGIN):
             self.last_incident_time = time.time()
             self.notify_incident(url)
 
